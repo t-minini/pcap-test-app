@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCAP Practice Test</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <h1>PCAP Practice Test</h1>
+  </header>
+
+  <main>
+    <section id="screen-home" class="screen">
+      <div class="home-hero">
+        <p>119 PCAP-style Python questions across four topics. Take a timed exam that mirrors the real certification test, or drill through the full bank with instant feedback.</p>
+        <div class="mode-cards">
+          <div class="mode-card">
+            <h2>Take Exam</h2>
+            <p>40 questions &middot; 65 minutes &middot; 70% to pass</p>
+            <button id="start-exam-btn" class="btn btn-primary">Start Exam</button>
+          </div>
+          <div class="mode-card">
+            <h2>Practice Mode</h2>
+            <p>All 119 questions &middot; untimed &middot; instant feedback</p>
+            <button id="start-practice-btn" class="btn btn-secondary">Start Practice</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-panel">
+        <div class="history-header">
+          <h2>Attempt History</h2>
+          <button id="clear-history-btn" class="link-btn">Clear history</button>
+        </div>
+        <table id="history-table">
+          <thead>
+            <tr><th>Date</th><th>Mode</th><th>Score</th><th>Result</th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+        <p id="history-empty" class="empty-note" hidden>No attempts yet — take an exam or a practice run to see your history here.</p>
+      </div>
+    </section>
+
+    <section id="screen-exam" class="screen" hidden>
+      <div class="exam-topbar">
+        <div class="exam-progress" id="exam-progress">Question 1 / 40</div>
+        <div class="exam-timer" id="exam-timer">65:00</div>
+      </div>
+      <div class="exam-body">
+        <div class="question-panel">
+          <div class="question-meta">
+            <span class="category-tag" id="exam-category"></span>
+            <button type="button" id="exam-flag-btn" class="flag-btn">🚩 Flag for review</button>
+          </div>
+          <p class="question-text" id="exam-question-text"></p>
+          <pre class="code-block" id="exam-code" hidden><code></code></pre>
+          <div class="options-list" id="exam-options"></div>
+        </div>
+        <aside class="palette-panel">
+          <h3>Questions</h3>
+          <div class="palette-grid" id="exam-palette"></div>
+          <div class="palette-legend">
+            <span><i class="dot answered"></i>Answered</span>
+            <span><i class="dot flagged"></i>Flagged</span>
+            <span><i class="dot unanswered"></i>Unanswered</span>
+          </div>
+          <button type="button" id="exam-submit-btn" class="btn btn-primary btn-block">Submit Exam</button>
+          <button type="button" id="exam-exit-btn" class="link-btn btn-block">Exit exam</button>
+        </aside>
+      </div>
+      <div class="exam-nav">
+        <button type="button" id="exam-prev-btn" class="btn btn-secondary">&larr; Previous</button>
+        <button type="button" id="exam-next-btn" class="btn btn-secondary">Next &rarr;</button>
+      </div>
+    </section>
+
+    <section id="screen-practice" class="screen" hidden>
+      <div class="practice-topbar">
+        <div class="practice-progress" id="practice-progress">Question 1 / 119</div>
+        <div class="practice-score" id="practice-score">Score: 0 / 0</div>
+        <button type="button" id="practice-exit-btn" class="link-btn">End practice</button>
+      </div>
+      <div class="question-panel">
+        <div class="question-meta">
+          <span class="category-tag" id="practice-category"></span>
+        </div>
+        <p class="question-text" id="practice-question-text"></p>
+        <pre class="code-block" id="practice-code" hidden><code></code></pre>
+        <div class="options-list" id="practice-options"></div>
+        <div class="feedback-box" id="practice-feedback" hidden>
+          <p class="feedback-verdict" id="practice-verdict"></p>
+          <p class="feedback-explanation" id="practice-explanation"></p>
+        </div>
+      </div>
+      <div class="practice-nav">
+        <button type="button" id="practice-check-btn" class="btn btn-primary" disabled>Check Answer</button>
+        <button type="button" id="practice-next-btn" class="btn btn-primary" hidden>Next Question &rarr;</button>
+      </div>
+    </section>
+
+    <section id="screen-results" class="screen" hidden>
+      <div id="results-banner" class="results-banner"></div>
+      <div class="results-summary">
+        <div class="summary-stat"><span id="results-score-percent"></span><label>Score</label></div>
+        <div class="summary-stat"><span id="results-correct-count"></span><label>Correct</label></div>
+        <div class="summary-stat" id="results-time-stat"><span id="results-time-used"></span><label>Time Used</label></div>
+      </div>
+      <div class="category-breakdown">
+        <h3>By Category</h3>
+        <div id="results-category-list"></div>
+      </div>
+      <div class="results-actions">
+        <button type="button" id="results-home-btn" class="btn btn-secondary">Back to Home</button>
+        <button type="button" id="results-retry-btn" class="btn btn-primary"></button>
+      </div>
+      <div id="results-review-section" class="review-section" hidden>
+        <h3>Review Answers</h3>
+        <div id="results-review-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="confirm-modal" class="modal-overlay" hidden>
+    <div class="modal-box">
+      <p id="confirm-modal-message"></p>
+      <div class="modal-actions">
+        <button type="button" id="confirm-modal-cancel" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="confirm-modal-ok" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

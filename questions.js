@@ -1,0 +1,3096 @@
+const QUESTIONS = [
+  {
+    "id": 1,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "What is true about Python packages? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "A code designed to initialize a package's state should be placed inside a file named __init__.py",
+        "isCorrect": true
+      },
+      {
+        "text": "A package's contents can be stored and distributed as an mp3 file",
+        "isCorrect": false
+      },
+      {
+        "text": "__pycache__ is a folder that stores semi-compiled Python modules (.pyc files)",
+        "isCorrect": true
+      },
+      {
+        "text": "The sys.path variable is a dictionary containing module names",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "__init__.py is executed when a package is imported and handles initialization. __pycache__ holds semi-compiled bytecode files (.pyc) to speed up module imports. sys.path is a list of strings, not a dictionary."
+  },
+  {
+    "id": 2,
+    "category": "Modules & Packages",
+    "multi": false,
+    "question": "What is the expected output of the following code snippet?",
+    "code": "import sys\nimport math\n\nb1 = type(dir(math)) is list\nb2 = type(sys.path) is list\nprint(b1 and b2)",
+    "options": [
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "True",
+        "isCorrect": true
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "False",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "dir(math) returns a list of names in the math module. sys.path is a list of directory path strings. Both types are 'list', so b1 and b2 are both True, making (b1 and b2) evaluate to True."
+  },
+  {
+    "id": 3,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "A Python package named pypack includes a module named pymod.py which contains a function named pyfun(). Which of the following snippets will let you invoke the function? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "from pypack.pymod import pyfun\npyfun()",
+        "isCorrect": true
+      },
+      {
+        "text": "import pypack\npymod.pyfun()",
+        "isCorrect": false
+      },
+      {
+        "text": "from pypack import *\npyfun()",
+        "isCorrect": false
+      },
+      {
+        "text": "import pypack.pymod\npypack.pymod.pyfun()",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Importing directly from the module namespace using `from pypack.pymod import pyfun` exposes `pyfun()`. Importing `pypack.pymod` requires using the fully qualified path `pypack.pymod.pyfun()`."
+  },
+  {
+    "id": 4,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming that the code below has been executed successfully, which of the following expressions will always evaluate to True? (Choose two.)",
+    "code": "import random\nv1 = random.random()\nv2 = random.random()",
+    "options": [
+      {
+        "text": "len(random.sample([1,2,3], 1)) > 2",
+        "isCorrect": false
+      },
+      {
+        "text": "random.choice([1, 2, 3]) > 0",
+        "isCorrect": true
+      },
+      {
+        "text": "random.sample([1, 2, 3], 2)[0] > 0",
+        "isCorrect": true
+      },
+      {
+        "text": "v1 > 1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "random.random() produces a float in [0.0, 1.0), so v1 > 1 is always False. random.choice([1,2,3]) picks an element from [1,2,3], all of which are strictly > 0, so it is always True. Any sample element from [1,2,3] is also > 0."
+  },
+  {
+    "id": 5,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "Given a directory tree pypack/upper/lower/module_c.py, select the proper forms of the directives in order to import module_c. (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "from pypack.upper.lower import module_c",
+        "isCorrect": true
+      },
+      {
+        "text": "import pypack.upper.lower.module_c",
+        "isCorrect": true
+      },
+      {
+        "text": "import upper.module_c",
+        "isCorrect": false
+      },
+      {
+        "text": "import upper.lower.module_c",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Package imports must use full dot notation starting from a directory listed in sys.path (pypack)."
+  },
+  {
+    "id": 6,
+    "category": "Modules & Packages",
+    "multi": false,
+    "question": "Which platform module function should be used to determine the underlying operating system platform name?",
+    "code": null,
+    "options": [
+      {
+        "text": "platform.processor()",
+        "isCorrect": false
+      },
+      {
+        "text": "platform.uname()",
+        "isCorrect": false
+      },
+      {
+        "text": "platform.python_version()",
+        "isCorrect": false
+      },
+      {
+        "text": "platform.platform()",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "platform.platform() returns a single string identifying the underlying platform with as much useful information as possible."
+  },
+  {
+    "id": 7,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "s = '2A'\ntry:\n    n = int(s)\nexcept ValueError:\n    n = 2\nexcept ArithmeticError:\n    n = 1\nexcept:\n    n = 0\nprint(n)",
+    "options": [
+      {
+        "text": "The code is erroneous and will not execute",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 2",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 0",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "int('2A') fails because '2A' is not a valid integer literal, raising a ValueError. The first matching except block is 'except ValueError:', setting n = 2."
+  },
+  {
+    "id": 8,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following snippets will execute without raising any unhandled exceptions? (Choose two.)",
+    "code": "Snippet A:\ntry:\n    print(-1/1)\nexcept:\n    print(0/1)\nelse:\n    print(1/1)\n\nSnippet B:\ntry:\n    x = 1\nexcept:\n    x = x + 1\nelse:\n    x = x + 2",
+    "options": [
+      {
+        "text": "Snippet A",
+        "isCorrect": true
+      },
+      {
+        "text": "Snippet B",
+        "isCorrect": true
+      },
+      {
+        "text": "try:\n    x = y + 1\nexcept (NameError):\n    x = y + 1",
+        "isCorrect": false
+      },
+      {
+        "text": "try:\n    x = 1 / 0\nexcept NameError:\n    x = 1 / 1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "In Snippet A, -1/1 produces -1.0 with no error, entering else: print(1/1) -> 1.0. Snippet B executes x = 1 with no exception, triggering else: x = x + 2 (x becomes 3). Both execute cleanly."
+  },
+  {
+    "id": 9,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "m = 0\ndef foo(n):\n    global m\n    assert m == 0\n    try:\n        return 1 / n\n    except ArithmeticError:\n        m += 1\n        raise\n\ntry:\n    foo(0)\nexcept ArithmeticError:\n    m += 2\nexcept:\n    m += 1\nprint(m)",
+    "options": [
+      {
+        "text": "It outputs 3",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 2",
+        "isCorrect": false
+      },
+      {
+        "text": "The code is erroneous",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "foo(0) causes ZeroDivisionError (subclass of ArithmeticError). Inside foo, m becomes 0 + 1 = 1, and raise re-raises ZeroDivisionError. The outer try handles ArithmeticError and adds 2 to m. Final m = 1 + 2 = 3."
+  },
+  {
+    "id": 10,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "What is true about the following exception code snippet? (Choose two.)",
+    "code": "class E(Exception):\n    def __init__(self, message):\n        self.message = message\n    def __str__(self):\n        return \"it's nice to see you\"\n\ntry:\n    print(\"I feel fine\")\n    raise E(\"what a pity\")\nexcept E as e:\n    print(e)\nelse:\n    print(\"the show must go on\")",
+    "options": [
+      {
+        "text": "The string 'what a pity' will be printed",
+        "isCorrect": false
+      },
+      {
+        "text": "The string 'it\\'s nice to see you' will be printed",
+        "isCorrect": true
+      },
+      {
+        "text": "The code will raise an unhandled exception",
+        "isCorrect": false
+      },
+      {
+        "text": "The string 'I feel fine' will be printed",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "print('I feel fine') runs first. Then E('what a pity') is raised. Raising E prints instance e via print(e), which invokes __str__ returning \"it's nice to see you\"."
+  },
+  {
+    "id": 11,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code snippet?",
+    "code": "my_list = [1, 2, 3]\ntry:\n    my_list[3] = my_list[2]\nexcept BaseException as error:\n    print(error)",
+    "options": [
+      {
+        "text": "It outputs error",
+        "isCorrect": false
+      },
+      {
+        "text": "It prints list assignment index out of range",
+        "isCorrect": true
+      },
+      {
+        "text": "The code is erroneous and will not execute",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs None",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "my_list only has indices 0, 1, 2. Accessing my_list[3] raises IndexError, caught by BaseException, printing 'list assignment index out of range'."
+  },
+  {
+    "id": 12,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "ord('0') - ord('9') == 10",
+        "isCorrect": false
+      },
+      {
+        "text": "len(\"''\") == 2",
+        "isCorrect": false
+      },
+      {
+        "text": "chr(ord('z') - 1) == 'y'",
+        "isCorrect": true
+      },
+      {
+        "text": "len('\"1234\"') == 6",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "ord('z') - 1 corresponds to ASCII code for 'y'. '\"1234\"' contains 6 characters (2 quotes + 4 digits)."
+  },
+  {
+    "id": 13,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'xYz'.lower() > 'XY'",
+        "isCorrect": true
+      },
+      {
+        "text": "'8' + '8' != 2 * '8'",
+        "isCorrect": false
+      },
+      {
+        "text": "float('3.14') == str('3.' + '14')",
+        "isCorrect": false
+      },
+      {
+        "text": "121 + 1 == int('1' + 2 * '2')",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "'xYz'.lower() is 'xyz'. 'xyz' > 'XY' is True because lowercase 'x' (ASCII 120) > uppercase 'X' (ASCII 88). Also, int('1' + 2 * '2') = int('122') = 122, which equals 121 + 1."
+  },
+  {
+    "id": 14,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code snippet?",
+    "code": "string = str(1/3)\ndummy = ''\nfor character in string:\n    dummy = dummy + character\nprint(dummy[:-1])",
+    "options": [
+      {
+        "text": "It outputs 0.333333333333333",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 'None'",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 0",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "str(1/3) produces '0.3333333333333333'. The loop concatenates all characters into dummy. Slicing dummy[:-1] strips the last character."
+  },
+  {
+    "id": 15,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "the_list = 'alpha;beta;gamma'.split(';')\nthe_string = ''.join(the_list)\nprint(the_string.isalpha())",
+    "options": [
+      {
+        "text": "It outputs True",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs False",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs nothing",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "split(';') creates ['alpha', 'beta', 'gamma']. ''.join(...) creates 'alphabetagamma', which consists purely of alphabetic characters, so isalpha() returns True."
+  },
+  {
+    "id": 16,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following invocations are valid string/sequence operations in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "sort('python')",
+        "isCorrect": false
+      },
+      {
+        "text": "'python'.find('')",
+        "isCorrect": true
+      },
+      {
+        "text": "'python'.sort()",
+        "isCorrect": false
+      },
+      {
+        "text": "sorted('python')",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "'python'.find('') is valid and returns 0 (empty string is found at index 0). sorted('python') returns a list of sorted characters ['h', 'n', 'o', 'p', 't', 'y']."
+  },
+  {
+    "id": 17,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following string membership expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'in' in 'in'",
+        "isCorrect": true
+      },
+      {
+        "text": "'in' in 'Thames'",
+        "isCorrect": false
+      },
+      {
+        "text": "'in not' in 'not'",
+        "isCorrect": false
+      },
+      {
+        "text": "'t'.upper() in 'Thames'",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "'in' is a substring of 'in' (True). 't'.upper() is 'T', which is the first character in 'Thames' (True)."
+  },
+  {
+    "id": 18,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Assuming that the snippet below has been executed successfully, which of the following expressions will evaluate to True? (Choose two.)",
+    "code": "string = 'python'[::2]\nstring = string[-1] + string[-2]",
+    "options": [
+      {
+        "text": "len(string) == 2",
+        "isCorrect": true
+      },
+      {
+        "text": "string[0] == 'o'",
+        "isCorrect": true
+      },
+      {
+        "text": "string[0] == string[-1]",
+        "isCorrect": false
+      },
+      {
+        "text": "string is None",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'python'[::2] extracts indices 0,2,4 -> 'pto'. string[-1] is 'o', string[-2] is 't'. string becomes 'ot'. Length is 2, and string[0] is 'o'."
+  },
+  {
+    "id": 19,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following statements are true regarding text processing in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "An escape sequence is recognized by the / sign put in front of it",
+        "isCorrect": false
+      },
+      {
+        "text": "ASCII is a subset of UNICODE",
+        "isCorrect": true
+      },
+      {
+        "text": "II in ASCII stands for Internal Information",
+        "isCorrect": false
+      },
+      {
+        "text": "A code point is a number assigned to a given character",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "ASCII (American Standard Code for Information Interchange) code points 0-127 map directly to Unicode code points 0-127. A code point is the numeric value assigned to represent a character."
+  },
+  {
+    "id": 20,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "A built-in class attribute that contains a tuple of direct superclasses of a class is named:",
+    "code": null,
+    "options": [
+      {
+        "text": "__bases__",
+        "isCorrect": true
+      },
+      {
+        "text": "__super__",
+        "isCorrect": false
+      },
+      {
+        "text": "__upper__",
+        "isCorrect": false
+      },
+      {
+        "text": "__ancestors__",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The __bases__ attribute of a class object contains a tuple containing all direct base classes of that class."
+  },
+  {
+    "id": 21,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming that Class has a class attribute 'var' and an instance attribute 'data', which of the following expressions evaluate to True? (Choose two.)",
+    "code": "class Class:\n    var = 1\n    def __init__(self):\n        self.data = 2",
+    "options": [
+      {
+        "text": "'var' in Class.__dict__",
+        "isCorrect": true
+      },
+      {
+        "text": "'data' in Object.__dict__",
+        "isCorrect": false
+      },
+      {
+        "text": "len(Class.__dict__) == 1",
+        "isCorrect": false
+      },
+      {
+        "text": "'data' in Class().__dict__",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Class attributes like 'var' reside in Class.__dict__. Instance attributes like 'data' reside in instance.__dict__ (Class().__dict__)."
+  },
+  {
+    "id": 22,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected behavior of the following OOP code?",
+    "code": "class A:\n    def __init__(self, v=2):\n        self.v = v\n    def set(self, v=1):\n        self.v += v\n        return self.v\n\na = A()\nprint(a.set())",
+    "options": [
+      {
+        "text": "It outputs 3",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 2",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "a = A() initializes self.v = 2. Calling a.set() uses default v=1, updating self.v = 2 + 1 = 3, and returning 3."
+  },
+  {
+    "id": 23,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming that the code below has been executed inside a top-level script named code.py, which of the following expressions evaluate to True? (Choose two.)",
+    "code": "class Object:\n    pass\nclass ClassB(Object):\n    pass",
+    "options": [
+      {
+        "text": "str(Object) == 'Object'",
+        "isCorrect": false
+      },
+      {
+        "text": "__name__ == '__main__'",
+        "isCorrect": true
+      },
+      {
+        "text": "len(ClassB.__bases__) == 1",
+        "isCorrect": true
+      },
+      {
+        "text": "ClassB.__module__ == 'ClassB'",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "When executed as the entry file, __name__ equals '__main__'. ClassB inherits directly from Object, so ClassB.__bases__ has length 1."
+  },
+  {
+    "id": 24,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming classes A, B, C exist with no inheritance cycle, which of the following class declarations demonstrate valid syntax for inheritance? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "class Class_3(A, C): pass",
+        "isCorrect": true
+      },
+      {
+        "text": "class Class_2(B, C): pass",
+        "isCorrect": true
+      },
+      {
+        "text": "class Class_4: A, B",
+        "isCorrect": false
+      },
+      {
+        "text": "class Class_1 = C(B): pass",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Multiple inheritance syntax uses comma-separated parent classes in parentheses after the class name."
+  },
+  {
+    "id": 25,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming the code below has executed successfully, which expressions evaluate to True? (Choose two.)",
+    "code": "class A:\n    VarA = 1\nclass B(A):\n    VarB = 2\n\nobj_b = B()",
+    "options": [
+      {
+        "text": "A.VarA == 1",
+        "isCorrect": true
+      },
+      {
+        "text": "isinstance(obj_b, A)",
+        "isCorrect": true
+      },
+      {
+        "text": "B.VarA == 2",
+        "isCorrect": false
+      },
+      {
+        "text": "obj_b is A",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "A.VarA is 1. Since B inherits from A, obj_b is an instance of B and also an instance of A (isinstance(obj_b, A) is True)."
+  },
+  {
+    "id": 26,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected output of the following snippet?",
+    "code": "class A:\n    def __init__(self):\n        self.a = 1\nclass B(A):\n    def __init__(self):\n        super().__init__()\n        self.b = 2\n\nobj = B()\nprint(hasattr(obj, 'a'), hasattr(obj, 'b'))",
+    "options": [
+      {
+        "text": "False True",
+        "isCorrect": false
+      },
+      {
+        "text": "True True",
+        "isCorrect": true
+      },
+      {
+        "text": "True False",
+        "isCorrect": false
+      },
+      {
+        "text": "False False",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Because B calls super().__init__(), both instance variable 'a' (from A) and 'b' (from B) are attached to obj."
+  },
+  {
+    "id": 27,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Which lines of code will work inside add_new() to append the last item of self.store back into self.store so that store becomes [0, 1, 1]? (Choose two.)",
+    "code": "class Queue:\n    def __init__(self):\n        self.store = [0, 1]\n    def put(self, val):\n        self.store.append(val)\n    def add_new(self):\n        # INSERT CODE HERE\n        pass",
+    "options": [
+      {
+        "text": "self.put(self.store[-1])",
+        "isCorrect": true
+      },
+      {
+        "text": "self.store.append(self.store[1])",
+        "isCorrect": true
+      },
+      {
+        "text": "self.put(store[1])",
+        "isCorrect": false
+      },
+      {
+        "text": "put(self.store[1])",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "self.store[-1] or self.store[1] is 1. Calling self.put(1) or self.store.append(1) appends 1 to [0, 1], yielding [0, 1, 1]."
+  },
+  {
+    "id": 28,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected behavior of the following code snippet?",
+    "code": "class A:\n    X = 0\n    def __init__(self):\n        A.X += 1\n\na1 = A()\na2 = A()\nprint(A.X)",
+    "options": [
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 2",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 0",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "A.X is a class variable. Every time A() is instantiated, __init__ increments A.X by 1. After 2 instantiations, A.X is 2."
+  },
+  {
+    "id": 29,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Object-Oriented Programming in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "Encapsulation allows you to hide a whole class inside a package",
+        "isCorrect": false
+      },
+      {
+        "text": "A class is a blueprint or recipe for creating objects",
+        "isCorrect": true
+      },
+      {
+        "text": "Each object of the same class can have a dynamic set of instance properties",
+        "isCorrect": true
+      },
+      {
+        "text": "UML class diagram arrows always point from superclass to subclass",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "A class acts as a blueprint/recipe. Python allows instance properties to be added dynamically to individual objects."
+  },
+  {
+    "id": 30,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Python class constructors (__init__)? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "The constructor's first parameter identifies the object instance being initialized",
+        "isCorrect": true
+      },
+      {
+        "text": "Super-class constructors are NOT invoked automatically; super().__init__() must be called explicitly",
+        "isCorrect": true
+      },
+      {
+        "text": "The constructor can return a string value",
+        "isCorrect": false
+      },
+      {
+        "text": "Constructors cannot accept default parameter values",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The first parameter (self) references the newly created instance. Python does NOT call superclass constructors automatically."
+  },
+  {
+    "id": 31,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected output of the following code?",
+    "code": "class A:\n    def __init__(self, v):\n        self.__v = v\n\na = A(3)\ntry:\n    print(a.__v)\nexcept AttributeError:\n    print(a._A__v)",
+    "options": [
+      {
+        "text": "It outputs 6",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an unhandled exception",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 3",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Private attributes starting with double underscores (__v) undergo name mangling to _ClassName__variable (_A__v). Accessing a.__v raises AttributeError, which catches and prints a._A__v (3)."
+  },
+  {
+    "id": 32,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following code?",
+    "code": "myli = range(-2, 2)\nm = list(filter(lambda x: True if abs(x) < 1 else False, myli))\nprint(len(m))",
+    "options": [
+      {
+        "text": "4",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": true
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "range(-2, 2) yields -2, -1, 0, 1. abs(x) < 1 is True only for x = 0. The filtered list is [0], which has length 1."
+  },
+  {
+    "id": 33,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "What is true about Python lambda functions? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "They are anonymous functions",
+        "isCorrect": true
+      },
+      {
+        "text": "They cannot return None",
+        "isCorrect": false
+      },
+      {
+        "text": "They must contain an explicit 'return' statement",
+        "isCorrect": false
+      },
+      {
+        "text": "They can accept zero or more parameters",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Lambdas are anonymous inline functions. They implicitly return the evaluated expression (no 'return' keyword allowed)."
+  },
+  {
+    "id": 34,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "x = 3 % 1\ny = 1 if x > 0 else 0\nprint(y)",
+    "options": [
+      {
+        "text": "The code is erroneous",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 0",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs -1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "3 % 1 equals 0. Since x > 0 is False, the ternary conditional assigns 0 to y."
+  },
+  {
+    "id": 35,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of reading a 0-byte file using read()? ",
+    "code": "f = open('empty_file.txt', 'r')\ncontent = f.read()\nprint(len(content))\nf.close()",
+    "options": [
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "-1",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "0",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Reading an empty file returns an empty string '', which has a length of 0."
+  },
+  {
+    "id": 36,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following list operation?",
+    "code": "l1 = [1, 2, 3]\nl2 = l1[-1:-3:-1]\nprint(len(l2))",
+    "options": [
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": true
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "l1[-1:-3:-1] starts at index -1 (value 3) and steps backward to index -2 (value 2), stopping before -3. l2 contains [3, 2], length 2."
+  },
+  {
+    "id": 37,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected behavior of the following list comprehension?",
+    "code": "my_list = [i for i in range(5)]\nm = [my_list[i] for i in range(4, 0, -1) if my_list[i] % 2 != 0]\nprint(m)",
+    "options": [
+      {
+        "text": "It outputs [4, 2, 0]",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs [3, 1]",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs [1, 3]",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs [0, 1, 2, 3, 4]",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "my_list = [0, 1, 2, 3, 4]. range(4, 0, -1) checks indices 4, 3, 2, 1. my_list[3]=3 (odd), my_list[1]=1 (odd). Result is [3, 1]."
+  },
+  {
+    "id": 38,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming the code below has executed, select expressions that evaluate to True. (Choose two.)",
+    "code": "def make_closure(x):\n    return lambda: x * 2\n\na = make_closure(2)\nb = make_closure(2)",
+    "options": [
+      {
+        "text": "a is not None",
+        "isCorrect": true
+      },
+      {
+        "text": "a() == 4",
+        "isCorrect": true
+      },
+      {
+        "text": "a == b",
+        "isCorrect": false
+      },
+      {
+        "text": "a() == 2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "a is a function object (closure), so 'a is not None' is True. Calling a() evaluates 2 * 2 = 4."
+  },
+  {
+    "id": 39,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following statements regarding file handling in Python are true? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "If open() fails to open a file, an exception (e.g. FileNotFoundError) is raised",
+        "isCorrect": true
+      },
+      {
+        "text": "open() requires at least one argument (the filename)",
+        "isCorrect": true
+      },
+      {
+        "text": "open() mode defaults to 'w'",
+        "isCorrect": false
+      },
+      {
+        "text": "Closing a file is performed via closefile()",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "If opening fails, open() raises an IOError/FileNotFoundError. The default mode is 'r', and closing is done via file.close()."
+  },
+  {
+    "id": 40,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the output of the following code if 'sample.txt' does not exist?",
+    "code": "try:\n    f = open('sample.txt', 'r')\n    print(1)\nexcept FileNotFoundError:\n    print(2)\nexcept:\n    print(3)\nelse:\n    print(4)",
+    "options": [
+      {
+        "text": "1 4",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": true
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "1 2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Attempting to open a non-existent file in read mode raises FileNotFoundError, triggering print(2)."
+  },
+  {
+    "id": 41,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming math module is imported, which of the following expressions evaluate to True? (Choose two.)",
+    "code": "import math",
+    "options": [
+      {
+        "text": "math.ceil(2.5) == math.trunc(2.5)",
+        "isCorrect": false
+      },
+      {
+        "text": "math.floor(2.5) == math.trunc(2.5)",
+        "isCorrect": true
+      },
+      {
+        "text": "math.hypot(3, 4) == math.sqrt(25)",
+        "isCorrect": true
+      },
+      {
+        "text": "math.floor(-2.5) == math.trunc(-2.5)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "math.floor(2.5) is 2, math.trunc(2.5) is 2. math.hypot(3,4) = sqrt(3^2 + 4^2) = 5.0, math.sqrt(25) = 5.0."
+  },
+  {
+    "id": 42,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "In package structure pypack/upper/module_b.py, which import directives are valid? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "import pypack.upper.module_b",
+        "isCorrect": true
+      },
+      {
+        "text": "from pypack.upper import module_b",
+        "isCorrect": true
+      },
+      {
+        "text": "import module_b",
+        "isCorrect": false
+      },
+      {
+        "text": "from upper import module_b",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Imports must start from top-level package pypack: `import pypack.upper.module_b` or `from pypack.upper import module_b`."
+  },
+  {
+    "id": 43,
+    "category": "Modules & Packages",
+    "multi": false,
+    "question": "What is the expected output of the following snippet?",
+    "code": "import sys\nb1 = type(dir(sys)) is str\nb2 = type(sys.path[-1]) is str\nprint(b1 and b2)",
+    "options": [
+      {
+        "text": "True",
+        "isCorrect": false
+      },
+      {
+        "text": "False",
+        "isCorrect": true
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "dir(sys) returns a list, not a str. So b1 is False. False and True evaluates to False."
+  },
+  {
+    "id": 44,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following generator code?",
+    "code": "def gen():\n    yield 1\n    yield 2\n\ng = gen()\nprint(next(g))",
+    "options": [
+      {
+        "text": "1",
+        "isCorrect": true
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "An exception is raised",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "next(g) executes the generator up to the first yield statement, returning 1."
+  },
+  {
+    "id": 45,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "s = 'abc'\ntry:\n    s[0] = 'x'\nexcept TypeError:\n    print('error')",
+    "options": [
+      {
+        "text": "It outputs error",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs xbc",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs abc",
+        "isCorrect": false
+      },
+      {
+        "text": "The code is invalid syntax",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Strings in Python are immutable. Attempting item assignment s[0] = 'x' raises a TypeError."
+  },
+  {
+    "id": 46,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of formatting floats with rounding?",
+    "code": "print('{:.2f}'.format(3.14159))",
+    "options": [
+      {
+        "text": "3.14",
+        "isCorrect": true
+      },
+      {
+        "text": "3.15",
+        "isCorrect": false
+      },
+      {
+        "text": "3.14159",
+        "isCorrect": false
+      },
+      {
+        "text": "3.1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'{:.2f}' formats a floating point number to 2 decimal places, producing '3.14'."
+  },
+  {
+    "id": 47,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "121 + 1 != int('1' + 2 * '2')",
+        "isCorrect": false
+      },
+      {
+        "text": "'3.14' != str(3.1415)",
+        "isCorrect": true
+      },
+      {
+        "text": "'AbC'.lower() < 'AB'",
+        "isCorrect": false
+      },
+      {
+        "text": "'apple' < 'banana'",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "'3.14' != '3.1415' is True. Lexicographical comparison 'apple' < 'banana' is True because 'a' < 'b'."
+  },
+  {
+    "id": 48,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "the_string = ',,'.join(('alpha', 'omega'))\nthe_list = the_string.split(',')\nprint(',' in the_list)",
+    "options": [
+      {
+        "text": "It outputs False",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs True",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs ''",
+        "isCorrect": false
+      },
+      {
+        "text": "the_list contains ['alpha', '', 'omega'], so '' in the_list is True, but ',' in the_list is False",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "the_string becomes 'alpha,,omega'. Splitting by ',' yields ['alpha', '', 'omega']. The character ',' is not an element of the list, so ',' in the_list is False."
+  },
+  {
+    "id": 49,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following reduce/sum operation?",
+    "code": "def fun(x):\n    return x[0]\n\nprint(fun([6, 3, 1]))",
+    "options": [
+      {
+        "text": "6",
+        "isCorrect": true
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "10",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "fun([6, 3, 1]) returns the first element of the list, which is 6."
+  },
+  {
+    "id": 50,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following string operation expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'True' not in 'False'",
+        "isCorrect": true
+      },
+      {
+        "text": "str(1-1) in '0123456789'[:2]",
+        "isCorrect": true
+      },
+      {
+        "text": "'dcb' in 'abcde'",
+        "isCorrect": false
+      },
+      {
+        "text": "'phd' in 'alpha'",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'True' is not inside 'False' (True). str(1-1) is '0', which is in '0123456789'[:2] ('01')."
+  },
+  {
+    "id": 51,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "len('''\\n''') > 0",
+        "isCorrect": true
+      },
+      {
+        "text": "len('\\'') == 1",
+        "isCorrect": true
+      },
+      {
+        "text": "ord('z') - ord('Z') == ord('0')",
+        "isCorrect": false
+      },
+      {
+        "text": "chr(ord('a') + 1) == 'B'",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Triple quoted string with newline has length 1 (> 0). Escaped single quote '\\'' has length 1."
+  },
+  {
+    "id": 52,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Given classes A, B, C, D, which class declarations demonstrate valid inheritance syntax? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "class Class_3(A, C): pass",
+        "isCorrect": true
+      },
+      {
+        "text": "class Class_1(D): pass",
+        "isCorrect": true
+      },
+      {
+        "text": "class Class_2 = A(B): pass",
+        "isCorrect": false
+      },
+      {
+        "text": "class Class_4: (C, B)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Class inheritance syntax uses class ClassName(Base1, Base2): pass."
+  },
+  {
+    "id": 53,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "class A:\n    def a(self):\n        return 1\nclass B(A):\n    def a(self):\n        return 2\nclass C(B):\n    pass\n\nc = C()\nprint(c.a())",
+    "options": [
+      {
+        "text": "It outputs 2",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 3",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Class C inherits from B, which overrides method a() to return 2. Accessing c.a() uses B's implementation."
+  },
+  {
+    "id": 54,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Python class constructors? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "The constructor's first parameter conventionally names the instance (self)",
+        "isCorrect": true
+      },
+      {
+        "text": "There can be only one __init__ constructor definition in a Python class",
+        "isCorrect": true
+      },
+      {
+        "text": "The constructor must return self explicitly",
+        "isCorrect": false
+      },
+      {
+        "text": "Constructors cannot accept variable arguments (*args)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "If multiple __init__ methods are defined in a class, only the last definition persists. The first parameter conventionally points to the instance."
+  },
+  {
+    "id": 55,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Object-Oriented Programming in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "Encapsulation allows restricting direct access to methods and variables",
+        "isCorrect": true
+      },
+      {
+        "text": "Inheritance represents an 'is-a' relationship between a subclass and superclass",
+        "isCorrect": true
+      },
+      {
+        "text": "An object is a blueprint for a class",
+        "isCorrect": false
+      },
+      {
+        "text": "Subclasses cannot override superclass methods",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Encapsulation hides internal data using double underscore mangling. Inheritance establishes an 'is-a' relationship."
+  },
+  {
+    "id": 56,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming Class has class variable 'var' and Object is a parent, which expressions evaluate to True? (Choose two.)",
+    "code": "class Object:\n    var = 10\nclass Class(Object):\n    pass",
+    "options": [
+      {
+        "text": "'var' in Object.__dict__",
+        "isCorrect": true
+      },
+      {
+        "text": "Class.var == 10",
+        "isCorrect": true
+      },
+      {
+        "text": "'var' in Class.__dict__",
+        "isCorrect": false
+      },
+      {
+        "text": "Object.var == 0",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'var' is defined directly in Object, so it is in Object.__dict__. Class inherits 'var' from Object, so Class.var == 10."
+  },
+  {
+    "id": 57,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming code below runs inside main script, which expressions evaluate to True? (Choose two.)",
+    "code": "class ClassA:\n    pass",
+    "options": [
+      {
+        "text": "ClassA.__module__ == '__main__'",
+        "isCorrect": true
+      },
+      {
+        "text": "isinstance(ClassA(), ClassA)",
+        "isCorrect": true
+      },
+      {
+        "text": "ClassA.__name__ == 'Main'",
+        "isCorrect": false
+      },
+      {
+        "text": "ClassA.__module__ == 'ClassA'",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "When run in the top-level script, __module__ is '__main__'. Instantiating ClassA() returns an instance of ClassA."
+  },
+  {
+    "id": 58,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Which lines of code will work inside add_new() to append the next integer [0, 1, 2]? (Choose two.)",
+    "code": "class Queue:\n    def __init__(self):\n        self.queue = [0, 1]\n    def get_last(self):\n        return self.queue[-1]\n    def add_new(self):\n        # INSERT CODE HERE\n        pass",
+    "options": [
+      {
+        "text": "self.queue.append(self.queue[-1] + 1)",
+        "isCorrect": true
+      },
+      {
+        "text": "self.queue.append(self.get_last() + 1)",
+        "isCorrect": true
+      },
+      {
+        "text": "self.queue.append(get_last() + 1)",
+        "isCorrect": false
+      },
+      {
+        "text": "queue.append(self.get_last() + 1)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Both self.queue[-1] + 1 and self.get_last() + 1 evaluate to 1 + 1 = 2, appending 2 to [0, 1] to form [0, 1, 2]."
+  },
+  {
+    "id": 59,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming the following code has executed successfully, which expressions evaluate to True? (Choose two.)",
+    "code": "class A:\n    def get(self):\n        return 1\nclass B(A):\n    pass\nclass C(B):\n    def get(self):\n        return 2\n\nobj_c = C()",
+    "options": [
+      {
+        "text": "hasattr(B, 'get')",
+        "isCorrect": true
+      },
+      {
+        "text": "obj_c.get() == 2",
+        "isCorrect": true
+      },
+      {
+        "text": "isinstance(obj_c, A) == False",
+        "isCorrect": false
+      },
+      {
+        "text": "obj_c.get() == 1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "B inherits method 'get' from A, so hasattr(B, 'get') is True. obj_c is an instance of C, which overrides get() to return 2."
+  },
+  {
+    "id": 60,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected output of the following code?",
+    "code": "class A:\n    def __str__(self):\n        return 'A'\nclass B(A):\n    def __str__(self):\n        return 'B'\nclass C(B):\n    pass\n\no = C()\nprint(o)",
+    "options": [
+      {
+        "text": "B",
+        "isCorrect": true
+      },
+      {
+        "text": "A",
+        "isCorrect": false
+      },
+      {
+        "text": "C",
+        "isCorrect": false
+      },
+      {
+        "text": "An exception is raised",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "C inherits from B. When print(o) is called, it triggers __str__(). B's __str__() overrides A's and returns 'B'."
+  },
+  {
+    "id": 61,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the output of reading one character from a non-empty text file?",
+    "code": "# f points to a non-empty file\nchar = f.read(1)\nprint(len(char))",
+    "options": [
+      {
+        "text": "1",
+        "isCorrect": true
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "-1",
+        "isCorrect": false
+      },
+      {
+        "text": "An error occurs",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "f.read(1) reads up to 1 byte/character from the stream, returning a string of length 1."
+  },
+  {
+    "id": 62,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the output of the following slice calculation?",
+    "code": "t = (1, 2, 3, 4)\nprint(t[1:-1][0])",
+    "options": [
+      {
+        "text": "2",
+        "isCorrect": true
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "4",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "t[1:-1] slices from index 1 to index 3 (exclusive), producing (2, 3). Index 0 of (2, 3) is 2."
+  },
+  {
+    "id": 63,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following code?",
+    "code": "mytu = ('a', 'b', 'c')\nm = tuple(map(lambda x: chr(ord(x) + 1), mytu))\nprint(m[-1])",
+    "options": [
+      {
+        "text": "d",
+        "isCorrect": true
+      },
+      {
+        "text": "c",
+        "isCorrect": false
+      },
+      {
+        "text": "b",
+        "isCorrect": false
+      },
+      {
+        "text": "An exception is raised",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "map shifts each character ASCII value by +1: 'a'->'b', 'b'->'c', 'c'->'d'. Tuple is ('b', 'c', 'd'). m[-1] is 'd'."
+  },
+  {
+    "id": 64,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following statements regarding file open modes are true? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "If open()'s second argument is 'r', the file must exist or open will fail",
+        "isCorrect": true
+      },
+      {
+        "text": "If open()'s second argument is 'w', existing file contents will be truncated/lost",
+        "isCorrect": true
+      },
+      {
+        "text": "Default mode for open() is 'w'",
+        "isCorrect": false
+      },
+      {
+        "text": "Mode 'a' erases existing file contents",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Mode 'r' requires the file to exist; otherwise FileNotFoundError is raised. Mode 'w' overwrites/truncates existing file content."
+  },
+  {
+    "id": 65,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the output of checking file object attributes after opening?",
+    "code": "f = open('test.txt', 'w')\nprint(f.closed)\nf.close()\nprint(f.closed)",
+    "options": [
+      {
+        "text": "False True",
+        "isCorrect": true
+      },
+      {
+        "text": "True False",
+        "isCorrect": false
+      },
+      {
+        "text": "False False",
+        "isCorrect": false
+      },
+      {
+        "text": "True True",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "f.closed is False while the stream is open, and becomes True immediately after f.close() is called."
+  },
+  {
+    "id": 66,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming the code below has executed, select expressions that evaluate to True. (Choose two.)",
+    "code": "def f(x):\n    return x * 2\na = f",
+    "options": [
+      {
+        "text": "a(2) == 4",
+        "isCorrect": true
+      },
+      {
+        "text": "a is not None",
+        "isCorrect": true
+      },
+      {
+        "text": "a == 2",
+        "isCorrect": false
+      },
+      {
+        "text": "a(2) == 2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'a' is assigned reference to function f. Calling a(2) executes f(2) = 4."
+  },
+  {
+    "id": 67,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following lambda definitions are valid syntax? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "lambda x, y: (x, y)",
+        "isCorrect": true
+      },
+      {
+        "text": "lambda x, y: x//y - x%y",
+        "isCorrect": true
+      },
+      {
+        "text": "lambda x, y: return x + y",
+        "isCorrect": false
+      },
+      {
+        "text": "lambda(x, y) = x + y",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Lambdas cannot contain the 'return' keyword or assignment syntax. `lambda x, y: (x, y)` returns a tuple, and `lambda x, y: x//y - x%y` evaluates an arithmetic expression."
+  },
+  {
+    "id": 68,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected output of checking subclass status?",
+    "code": "class A: pass\nclass B(A): pass\nprint(issubclass(A, B))",
+    "options": [
+      {
+        "text": "False",
+        "isCorrect": true
+      },
+      {
+        "text": "True",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "An exception is raised",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "issubclass(A, B) checks if A is a subclass of B. Since B inherits from A (not vice versa), it returns False."
+  },
+  {
+    "id": 69,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following code?",
+    "code": "myli = [1, 2, 4]\nm = list(map(lambda x: 2**x, myli))\nprint(m[-1])",
+    "options": [
+      {
+        "text": "16",
+        "isCorrect": true
+      },
+      {
+        "text": "4",
+        "isCorrect": false
+      },
+      {
+        "text": "8",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "map evaluates 2**1=2, 2**2=4, 2**4=16. List is [2, 4, 16]. m[-1] is 16."
+  },
+  {
+    "id": 70,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "my_list = [i for i in range(5)]\nm = [my_list[i] for i in range(5) if my_list[i] % 2 != 0]\nprint(m)",
+    "options": [
+      {
+        "text": "It outputs [1, 3]",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs [0, 2, 4]",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs [0, 1, 2, 3, 4]",
+        "isCorrect": false
+      },
+      {
+        "text": "The code is erroneous",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "my_list = [0, 1, 2, 3, 4]. Filtering odd values (val % 2 != 0) extracts [1, 3]."
+  },
+  {
+    "id": 71,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "What is true about Python packages? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "A package is a directory/group of related modules",
+        "isCorrect": true
+      },
+      {
+        "text": "The .pyc extension is used for compiled Python bytecode files",
+        "isCorrect": true
+      },
+      {
+        "text": "A package is a single file ending with .pa",
+        "isCorrect": false
+      },
+      {
+        "text": "The __name__ variable always contains package name",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Packages are directories containing modules and an __init__.py file. .pyc files store compiled bytecode."
+  },
+  {
+    "id": 72,
+    "category": "Modules & Packages",
+    "multi": false,
+    "question": "Which platform module function should be used to determine the OS release/version?",
+    "code": null,
+    "options": [
+      {
+        "text": "platform.version()",
+        "isCorrect": true
+      },
+      {
+        "text": "platform.processor()",
+        "isCorrect": false
+      },
+      {
+        "text": "platform.python_version()",
+        "isCorrect": false
+      },
+      {
+        "text": "platform.system_id()",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "platform.version() returns the OS version string."
+  },
+  {
+    "id": 73,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "The __bases__ property of a class contains:",
+    "code": null,
+    "options": [
+      {
+        "text": "A tuple of direct superclass objects",
+        "isCorrect": true
+      },
+      {
+        "text": "Base class memory addresses",
+        "isCorrect": false
+      },
+      {
+        "text": "Base class names as strings",
+        "isCorrect": false
+      },
+      {
+        "text": "Base class IDs as integers",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "__bases__ contains a tuple of the base class objects themselves."
+  },
+  {
+    "id": 74,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming code below runs successfully, select expressions that evaluate to True. (Choose two.)",
+    "code": "def f():\n    return 5\na = f",
+    "options": [
+      {
+        "text": "a() > 2",
+        "isCorrect": true
+      },
+      {
+        "text": "a is not None",
+        "isCorrect": true
+      },
+      {
+        "text": "a() == None",
+        "isCorrect": false
+      },
+      {
+        "text": "a is 5",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "a holds reference to f. a() returns 5, which is > 2. Function object 'a' is not None."
+  },
+  {
+    "id": 75,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Assuming snippet below runs, which expressions evaluate to True? (Choose two.)",
+    "code": "string = 'REPTILE'[:3:]\nstring = string[-1] + string[-2::-1]",
+    "options": [
+      {
+        "text": "len(string) == 3",
+        "isCorrect": true
+      },
+      {
+        "text": "string[0] < string[-1]",
+        "isCorrect": true
+      },
+      {
+        "text": "string[0] == 'E'",
+        "isCorrect": false
+      },
+      {
+        "text": "string is None",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'REPTILE'[:3:] is 'REP'. string[-1] is 'P', string[-2::-1] is 'ER'. string becomes 'PER'. Length is 3. 'P' (ASCII 80) < 'R' (ASCII 82) is True."
+  },
+  {
+    "id": 76,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Which lines of code will work inside inc() to make output equal to 3? (Choose two.)",
+    "code": "class Counter:\n    def __init__(self):\n        self.prop = 1\n    def get(self):\n        return self.prop\n    def put(self, val):\n        self.prop = val\n    def inc(self, val=2):\n        # INSERT CODE HERE\n        pass\n\nc = Counter()\nc.inc()\nprint(c.get())",
+    "options": [
+      {
+        "text": "self.put(self.prop + val)",
+        "isCorrect": true
+      },
+      {
+        "text": "self.put(self.get() + val)",
+        "isCorrect": true
+      },
+      {
+        "text": "put(self.prop + val)",
+        "isCorrect": false
+      },
+      {
+        "text": "self.put(get() + val)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "self.prop (1) + val (2) = 3. Passing 3 to self.put() sets self.prop = 3. Calling self.get() or self.prop directly inside inc requires self."
+  },
+  {
+    "id": 77,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following lambda function definitions are valid? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "lambda : 3.1415",
+        "isCorrect": true
+      },
+      {
+        "text": "lambda x : None",
+        "isCorrect": true
+      },
+      {
+        "text": "lambda x : def f(x): return x",
+        "isCorrect": false
+      },
+      {
+        "text": "lambda lambda : lambda * lambda",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Lambdas can take zero parameters (`lambda : 3.1415`) or return None (`lambda x : None`). They cannot contain `def` keywords or use reserved keywords as parameter names."
+  },
+  {
+    "id": 78,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Object-Oriented Programming in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "The same class can be instantiated to build multiple independent objects",
+        "isCorrect": true
+      },
+      {
+        "text": "A subclass is usually more specialized than its superclass",
+        "isCorrect": true
+      },
+      {
+        "text": "Each object of the same class must have a different set of methods",
+        "isCorrect": false
+      },
+      {
+        "text": "Subclasses inherit nothing from superclasses",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Classes can instantiate multiple objects. Subclasses extend/specialize superclass behavior through inheritance."
+  },
+  {
+    "id": 79,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the output of checking element types in standard modules?",
+    "code": "import sys\nimport math\nb1 = type(dir(math)[0]) is str\nb2 = type(sys.path[-1]) is str\nprint(b1 and b2)",
+    "options": [
+      {
+        "text": "True",
+        "isCorrect": true
+      },
+      {
+        "text": "False",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "dir(math)[0] is a string attribute name ('acos'). sys.path[-1] is a directory string. Both are strings, so b1 and b2 are True."
+  },
+  {
+    "id": 80,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following statements regarding character encodings are true? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "UTF-8 is a variable-length encoding for UNICODE code points",
+        "isCorrect": true
+      },
+      {
+        "text": "ASCII is a character encoding standard",
+        "isCorrect": true
+      },
+      {
+        "text": "An escape sequence is marked by a # sign",
+        "isCorrect": false
+      },
+      {
+        "text": "A code point is an instruction to pause execution",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "UTF-8 encodes UNICODE code points into 1-4 bytes. ASCII is a 7-bit character encoding standard."
+  },
+  {
+    "id": 81,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "What is true about Python class constructors? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "The constructor is a special method named __init__",
+        "isCorrect": true
+      },
+      {
+        "text": "The constructor must have at least one parameter (self)",
+        "isCorrect": true
+      },
+      {
+        "text": "There can be multiple active constructor overloads in a class",
+        "isCorrect": false
+      },
+      {
+        "text": "The constructor must return an integer status code",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "__init__ is the constructor method. It must take at least one parameter (`self`) to reference the new instance."
+  },
+  {
+    "id": 82,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following string method invocations are valid? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'python'.index('th')",
+        "isCorrect": true
+      },
+      {
+        "text": "sorted('python')",
+        "isCorrect": true
+      },
+      {
+        "text": "'python'.sort()",
+        "isCorrect": false
+      },
+      {
+        "text": "rfind('python', 'r')",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'python'.index('th') returns index 2. sorted('python') returns sorted character list."
+  },
+  {
+    "id": 83,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following string method invocations are valid? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'python'.rindex('th')",
+        "isCorrect": true
+      },
+      {
+        "text": "'python'.find('')",
+        "isCorrect": true
+      },
+      {
+        "text": "'python'.sorted()",
+        "isCorrect": false
+      },
+      {
+        "text": "sort('python')",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "rindex searches from the right. find('') finds empty string at index 0."
+  },
+  {
+    "id": 84,
+    "category": "Object-Oriented Programming",
+    "multi": true,
+    "question": "Assuming script runs directly, which expressions evaluate to True? (Choose two.)",
+    "code": "class ClassA:\n    pass\nclass ClassB:\n    pass",
+    "options": [
+      {
+        "text": "ClassA.__module__ == '__main__'",
+        "isCorrect": true
+      },
+      {
+        "text": "__name__ == '__main__'",
+        "isCorrect": true
+      },
+      {
+        "text": "len(ClassB.__bases__) == 2",
+        "isCorrect": false
+      },
+      {
+        "text": "str(ClassA) == 'ClassA'",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Top-level execution sets __name__ and ClassA.__module__ to '__main__'."
+  },
+  {
+    "id": 85,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of the following code snippet?",
+    "code": "the_list = '1,2'.split()\nthe_string = ''.join(the_list)\nprint(the_string.isdigit())",
+    "options": [
+      {
+        "text": "It outputs False",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs True",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs nothing",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'1,2'.split() splits by whitespace, resulting in ['1,2']. ''.join(...) gives '1,2'. Because of the comma ',', isdigit() returns False."
+  },
+  {
+    "id": 86,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following try-except blocks will execute without raising unhandled exceptions? (Choose two.)",
+    "code": "Snippet 1:\ntry:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    x = 1\n\nSnippet 2:\ntry:\n    x = int('10')\nexcept ValueError:\n    x = 0",
+    "options": [
+      {
+        "text": "Snippet 1",
+        "isCorrect": true
+      },
+      {
+        "text": "Snippet 2",
+        "isCorrect": true
+      },
+      {
+        "text": "try:\n    x = 1 / 0\nexcept ValueError:\n    x = 1",
+        "isCorrect": false
+      },
+      {
+        "text": "try:\n    x = y\nexcept ZeroDivisionError:\n    x = 0",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Snippet 1 catches ZeroDivisionError cleanly. Snippet 2 executes int('10') successfully (x=10)."
+  },
+  {
+    "id": 87,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "Module pymod.py contains variable pyvar. Which snippets let you access pyvar? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "from pymod import *\npyvar = 1",
+        "isCorrect": true
+      },
+      {
+        "text": "import pymod\npymod.pyvar = 1",
+        "isCorrect": true
+      },
+      {
+        "text": "import pyvar from pymod",
+        "isCorrect": false
+      },
+      {
+        "text": "from pymod import pyvar\npyvar()",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "from pymod import * imports pyvar directly. import pymod grants access via module namespace pymod.pyvar."
+  },
+  {
+    "id": 88,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected behavior of the following code?",
+    "code": "class A:\n    v = 1\nclass B(A):\n    v = 2\nclass C(B):\n    pass\n\nc = C()\nprint(c.v)",
+    "options": [
+      {
+        "text": "It outputs 2",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs 1",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 3",
+        "isCorrect": false
+      },
+      {
+        "text": "It raises an exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "C inherits from B. B overrides v = 2. Looking up c.v finds v = 2 in class B before reaching class A."
+  },
+  {
+    "id": 89,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following expressions evaluate to True? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'not' not in 'in'",
+        "isCorrect": true
+      },
+      {
+        "text": "'t'.upper() in 'Thames'",
+        "isCorrect": true
+      },
+      {
+        "text": "'in not' in 'not'",
+        "isCorrect": false
+      },
+      {
+        "text": "'a' not in 'ABC'.lower()",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'not' is not in 'in' (True). 't'.upper() is 'T', which is in 'Thames' (True)."
+  },
+  {
+    "id": 90,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of slicing beyond list boundaries?",
+    "code": "my_list = [1, 2, 3]\nprint(my_list[10:20])",
+    "options": [
+      {
+        "text": "It outputs []",
+        "isCorrect": true
+      },
+      {
+        "text": "It raises IndexError",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs None",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs [3]",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Slicing beyond string or list bounds does not raise IndexError in Python; it gracefully returns an empty list []."
+  },
+  {
+    "id": 91,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of trying to mutate a tuple?",
+    "code": "t = (1, 2, 3)\ntry:\n    t[0] = 99\nexcept TypeError as e:\n    print(e)",
+    "options": [
+      {
+        "text": "It prints 'tuple' object does not support item assignment",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs None",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs (99, 2, 3)",
+        "isCorrect": false
+      },
+      {
+        "text": "Syntax error",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Tuples are immutable. Attempting item assignment raises a TypeError, printing 'tuple object does not support item assignment'."
+  },
+  {
+    "id": 92,
+    "category": "Object-Oriented Programming",
+    "multi": false,
+    "question": "What is the expected output of checking boolean class attribute presence?",
+    "code": "class A:\n    pass\nprint(hasattr(A, '__name__'))",
+    "options": [
+      {
+        "text": "True",
+        "isCorrect": true
+      },
+      {
+        "text": "False",
+        "isCorrect": false
+      },
+      {
+        "text": "None",
+        "isCorrect": false
+      },
+      {
+        "text": "AttributeError",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "All class objects in Python automatically possess the built-in attribute __name__, so hasattr(A, '__name__') returns True."
+  },
+  {
+    "id": 93,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "Given directory structure pypack/module_a.py, select valid import statements. (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "import pypack.module_a",
+        "isCorrect": true
+      },
+      {
+        "text": "from pypack import module_a",
+        "isCorrect": true
+      },
+      {
+        "text": "import module_a from pypack",
+        "isCorrect": false
+      },
+      {
+        "text": "import pypack/module_a",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Valid package module import syntax includes `import pypack.module_a` and `from pypack import module_a`."
+  },
+  {
+    "id": 94,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What will be the value of the i variable when the following loop finishes execution?",
+    "code": "i = 0\nwhile i != 0:\n    i = i - 1\nelse:\n    i = i + 1",
+    "options": [
+      {
+        "text": "1",
+        "isCorrect": true
+      },
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "The variable becomes unavailable",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Initially i is 0. The while loop condition (0 != 0) is False, so the loop body is skipped and execution enters the else block: i = 0 + 1 = 1."
+  },
+  {
+    "id": 95,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which operators are able to perform bitwise shifts in Python? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": ">>",
+        "isCorrect": true
+      },
+      {
+        "text": "<<",
+        "isCorrect": true
+      },
+      {
+        "text": "--",
+        "isCorrect": false
+      },
+      {
+        "text": "++",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Bitwise shift operators in Python are '<<' (left shift) and '>>' (right shift)."
+  },
+  {
+    "id": 96,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What will be the value of variable i after the following loop finishes?",
+    "code": "for i in range(10):\n    pass",
+    "options": [
+      {
+        "text": "9",
+        "isCorrect": true
+      },
+      {
+        "text": "10",
+        "isCorrect": false
+      },
+      {
+        "text": "The variable becomes unavailable",
+        "isCorrect": false
+      },
+      {
+        "text": "11",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "In Python, loop variables remain in the scope after loop completion. range(10) iterates from 0 to 9, so i remains 9."
+  },
+  {
+    "id": 97,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the value of the following expression?",
+    "code": "1 + -2",
+    "options": [
+      {
+        "text": "-1",
+        "isCorrect": true
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "Invalid syntax",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "1 + -2 evaluates directly to 1 - 2 = -1."
+  },
+  {
+    "id": 98,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "A compiler is a program designed to: (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "Check the source code in order to see if it is correct",
+        "isCorrect": true
+      },
+      {
+        "text": "Translate the source code into machine code",
+        "isCorrect": true
+      },
+      {
+        "text": "Rearrange the source code to make it clearer",
+        "isCorrect": false
+      },
+      {
+        "text": "Execute the source code directly line by line",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "A compiler verifies source code syntax/correctness and translates the high-level code into low-level machine bytecode."
+  },
+  {
+    "id": 99,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the output of the following print statement?",
+    "code": "a = 'ant'\nb = \"bat\"\nc = 'camel'\nprint(a, b, c, sep='\"')",
+    "options": [
+      {
+        "text": "ant\"bat\"camel",
+        "isCorrect": true
+      },
+      {
+        "text": "ant bat camel",
+        "isCorrect": false
+      },
+      {
+        "text": "antbatcamel",
+        "isCorrect": false
+      },
+      {
+        "text": "ant'bat'camel",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The sep parameter specifies the separator character placed between arguments. sep='\"' puts a double quote between each printed word."
+  },
+  {
+    "id": 100,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "How many lines does the following snippet output?",
+    "code": "for i in range(1, 3):\n    print(\"*\", end=\"\")\nelse:\n    print(\"*\")",
+    "options": [
+      {
+        "text": "one",
+        "isCorrect": true
+      },
+      {
+        "text": "two",
+        "isCorrect": false
+      },
+      {
+        "text": "three",
+        "isCorrect": false
+      },
+      {
+        "text": "four",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The loop prints two asterisks with end=\"\" (staying on line 1), then the else block prints one asterisk with default newline. Total output is '***' on one single line."
+  },
+  {
+    "id": 101,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following float literals reflect the value 34.23? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": ".3423e2",
+        "isCorrect": true
+      },
+      {
+        "text": "3423e-2",
+        "isCorrect": true
+      },
+      {
+        "text": ".3423e-2",
+        "isCorrect": false
+      },
+      {
+        "text": "3423e2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": ".3423e2 = 0.3423 * 10^2 = 34.23. 3423e-2 = 3423 * 10^-2 = 34.23."
+  },
+  {
+    "id": 102,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming a = [1], b = a, a[0] = 0, which equations are True? (Choose two.)",
+    "code": "a = [1]\nb = a\na[0] = 0",
+    "options": [
+      {
+        "text": "len(a) == len(b)",
+        "isCorrect": true
+      },
+      {
+        "text": "a[0] == b[0]",
+        "isCorrect": true
+      },
+      {
+        "text": "b[0] + 1 == a[0]",
+        "isCorrect": false
+      },
+      {
+        "text": "a[0] + 1 == b[0]",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "b = a binds b to the exact same list object in memory as a. Modifying a[0] modifies b[0] identically, so len(a)==len(b) and a[0]==b[0] are both True."
+  },
+  {
+    "id": 103,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Assuming a = [0], b = a[:], a[0] = 1, which equations are FALSE? (Choose two.)",
+    "code": "a = [0]\nb = a[:]\na[0] = 1",
+    "options": [
+      {
+        "text": "a[0] == b[0]",
+        "isCorrect": true
+      },
+      {
+        "text": "b[0] - 1 == a[0]",
+        "isCorrect": true
+      },
+      {
+        "text": "len(a) == len(b)",
+        "isCorrect": false
+      },
+      {
+        "text": "a[0] - 1 == b[0]",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "b = a[:] creates a new shallow copy of list a. Modifying a[0]=1 leaves b[0]=0. Therefore, a[0] == b[0] (1==0) is FALSE, and b[0]-1==a[0] (-1==1) is FALSE."
+  },
+  {
+    "id": 104,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which of the following statements regarding Python strings are true? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "Python strings can be concatenated",
+        "isCorrect": true
+      },
+      {
+        "text": "Python strings can be sliced like lists",
+        "isCorrect": true
+      },
+      {
+        "text": "Python strings are actually lists",
+        "isCorrect": false
+      },
+      {
+        "text": "Python strings are mutable",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Strings are sequence types support concatenation (+) and slicing ([::]), but they are immutable objects."
+  },
+  {
+    "id": 105,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following statements regarding container nesting are true? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "Tuples may be stored inside lists",
+        "isCorrect": true
+      },
+      {
+        "text": "Lists may be stored inside lists",
+        "isCorrect": true
+      },
+      {
+        "text": "Lists may not be stored inside tuples",
+        "isCorrect": false
+      },
+      {
+        "text": "Tuples may not be stored inside tuples",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "In Python, arbitrary structure nesting is supported: tuples can hold lists, lists can hold tuples, and lists can hold lists."
+  },
+  {
+    "id": 106,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "Assuming string is six or more characters long, string[1:-2] is shorter than the original string by:",
+    "code": null,
+    "options": [
+      {
+        "text": "three chars",
+        "isCorrect": true
+      },
+      {
+        "text": "four chars",
+        "isCorrect": false
+      },
+      {
+        "text": "one char",
+        "isCorrect": false
+      },
+      {
+        "text": "two chars",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Slice [1:-2] strips 1 character from the start (index 0) and 2 characters from the end (indices -2 and -1), making it exactly 3 characters shorter."
+  },
+  {
+    "id": 107,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of the following list slice operation?",
+    "code": "lst = [1, 2, 3, 4]\nlst = lst[-3:-2]\nlst = lst[-1]\nprint(lst)",
+    "options": [
+      {
+        "text": "2",
+        "isCorrect": true
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "4",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "lst[-3:-2] extracts element at index -3 ([2]). lst = [2]. Then lst[-1] extracts the integer 2."
+  },
+  {
+    "id": 108,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What is the expected behavior of trying to iterate over len(s) in a for loop?",
+    "code": "s = 'abc'\nfor i in len(s):\n    s[i] = s[i].upper()\nprint(s)",
+    "options": [
+      {
+        "text": "The code will cause a runtime exception (TypeError)",
+        "isCorrect": true
+      },
+      {
+        "text": "It outputs ABC",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs abc",
+        "isCorrect": false
+      },
+      {
+        "text": "It outputs 123",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "len(s) returns an integer (3). 'for i in 3:' raises 'TypeError: int object is not iterable'. Furthermore, string item assignment s[i]=... is not supported."
+  },
+  {
+    "id": 109,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "How many elements will list2 contain after execution of the following snippet?",
+    "code": "list1 = [False for i in range(1, 10)]\nlist2 = list1[-1:1:-1]",
+    "options": [
+      {
+        "text": "seven",
+        "isCorrect": true
+      },
+      {
+        "text": "five",
+        "isCorrect": false
+      },
+      {
+        "text": "zero",
+        "isCorrect": false
+      },
+      {
+        "text": "three",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "list1 has 9 items (indices 0..8). Slice [-1:1:-1] steps backwards from index 8 down to index 2 (excluding 1), resulting in 7 elements."
+  },
+  {
+    "id": 110,
+    "category": "Exceptions & Strings",
+    "multi": true,
+    "question": "Which expressions check whether key 'key' exists in dictionary dict_obj? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "'key' in dict_obj",
+        "isCorrect": true
+      },
+      {
+        "text": "'key' in dict_obj.keys()",
+        "isCorrect": true
+      },
+      {
+        "text": "dict_obj['key'] != None",
+        "isCorrect": false
+      },
+      {
+        "text": "dict_obj.exists('key')",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "'key' in dict_obj and 'key' in dict_obj.keys() properly check key existence. Direct indexing dict_obj['key'] throws KeyError if missing."
+  },
+  {
+    "id": 111,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following dictionary declarations are valid syntax for telephone directories? (Choose two.)",
+    "code": null,
+    "options": [
+      {
+        "text": "dir = {'Mom': 5551234567, 'Dad': 5557654321}",
+        "isCorrect": true
+      },
+      {
+        "text": "dir = {'Mom': '5551234567', 'Dad': '5557654321'}",
+        "isCorrect": true
+      },
+      {
+        "text": "dir = {Mom: 5551234567, Dad: 5557654321}",
+        "isCorrect": false
+      },
+      {
+        "text": "dir = {Mom: '5551234567', Dad: '5557654321'}",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Keys 'Mom' and 'Dad' are string literals and must be enclosed in quotes."
+  },
+  {
+    "id": 112,
+    "category": "Modules & Packages",
+    "multi": false,
+    "question": "Can a Python module run as a top-level executable script?",
+    "code": null,
+    "options": [
+      {
+        "text": "Yes, and it can differentiate its behavior between regular launch and import using __name__",
+        "isCorrect": true
+      },
+      {
+        "text": "No, a module can only be imported",
+        "isCorrect": false
+      },
+      {
+        "text": "Yes, but it cannot differentiate between import and execution",
+        "isCorrect": false
+      },
+      {
+        "text": "It depends on the Python installation version",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Checking `if __name__ == '__main__':` allows a module to run standalone testing code when launched directly."
+  },
+  {
+    "id": 113,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Given function def fun(a, b=0): return a ** b, select valid function calls. (Choose two.)",
+    "code": "def fun(a, b=0):\n    return a ** b",
+    "options": [
+      {
+        "text": "fun(a=0)",
+        "isCorrect": true
+      },
+      {
+        "text": "fun(1)",
+        "isCorrect": true
+      },
+      {
+        "text": "fun(b=1)",
+        "isCorrect": false
+      },
+      {
+        "text": "fun(b=1, 0)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Parameter 'a' is required (positional/keyword). Parameter 'b' has default value 0. Calling fun(a=0) or fun(1) provides parameter 'a'."
+  },
+  {
+    "id": 114,
+    "category": "Modules & Packages",
+    "multi": true,
+    "question": "What does the bytecode compiled filename services.cpython-36.pyc signify? (Choose three.)",
+    "code": null,
+    "options": [
+      {
+        "text": "The interpreter version used to generate it is Python 3.6",
+        "isCorrect": true
+      },
+      {
+        "text": "It has been produced by CPython implementation",
+        "isCorrect": true
+      },
+      {
+        "text": "The file comes from the services.py source file",
+        "isCorrect": true
+      },
+      {
+        "text": "It is revision 36 of the source file",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Filename format name.cpython-xy.pyc specifies original file name (services.py), implementation (cpython), and version (3.6)."
+  },
+  {
+    "id": 115,
+    "category": "Exceptions & Strings",
+    "multi": false,
+    "question": "What happens when deleting an item from a string like del s[2]?",
+    "code": "s = 'abcdef'\ndef fun(s):\n    del s[2]\n    return s\nprint(fun(s))",
+    "options": [
+      {
+        "text": "The program will cause a runtime exception (TypeError)",
+        "isCorrect": true
+      },
+      {
+        "text": "It prints abdef",
+        "isCorrect": false
+      },
+      {
+        "text": "It prints abcef",
+        "isCorrect": false
+      },
+      {
+        "text": "It prints acdef",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Strings are immutable in Python; attempting 'del s[2]' raises 'TypeError: 'str' object doesn't support item deletion'."
+  },
+  {
+    "id": 116,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of this recursive string building function?",
+    "code": "def f(n):\n    if n == 1:\n        return '1'\n    return str(n) + f(n-1)\nprint(f(2))",
+    "options": [
+      {
+        "text": "21",
+        "isCorrect": true
+      },
+      {
+        "text": "12",
+        "isCorrect": false
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "f(2) returns str(2) + f(1) = '2' + '1' = '21'."
+  },
+  {
+    "id": 117,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the result of evaluating function name reassignment in this scope?",
+    "code": "def x():\n    return 2\nx = 1 + x()\nprint(x)",
+    "options": [
+      {
+        "text": "3",
+        "isCorrect": true
+      },
+      {
+        "text": "Cause a runtime exception on line 01",
+        "isCorrect": false
+      },
+      {
+        "text": "Cause a runtime exception on line 03",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Right hand side 1 + x() is evaluated first (1 + 2 = 3). The result 3 is then assigned to identifier x."
+  },
+  {
+    "id": 118,
+    "category": "Advanced / Misc",
+    "multi": false,
+    "question": "What is the expected output of printing a generator function call directly without iterating?",
+    "code": "def f(n):\n    for i in range(1, n+1):\n        yield i\nprint(f(2))",
+    "options": [
+      {
+        "text": "<generator object f at ...>",
+        "isCorrect": true
+      },
+      {
+        "text": "1 2",
+        "isCorrect": false
+      },
+      {
+        "text": "2 1",
+        "isCorrect": false
+      },
+      {
+        "text": "Runtime exception",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Calling a generator function returns a generator object iterator, not the yielded values."
+  },
+  {
+    "id": 119,
+    "category": "Advanced / Misc",
+    "multi": true,
+    "question": "Which of the following math module expressions evaluate to True? (Choose two.)",
+    "code": "import math",
+    "options": [
+      {
+        "text": "math.floor(2.5) == math.trunc(2.5)",
+        "isCorrect": true
+      },
+      {
+        "text": "math.hypot(3, 4) == math.sqrt(25)",
+        "isCorrect": true
+      },
+      {
+        "text": "math.ceil(2.5) == math.trunc(2.5)",
+        "isCorrect": false
+      },
+      {
+        "text": "math.floor(-2.5) == math.trunc(-2.5)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "math.floor(2.5) is 2, math.trunc(2.5) is 2. math.hypot(3,4) = sqrt(9+16) = 5.0, math.sqrt(25) = 5.0."
+  }
+];
