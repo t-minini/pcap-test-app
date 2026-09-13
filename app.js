@@ -13,6 +13,7 @@
     currentIndex: 0,
     answers: {},
     flagged: {},
+    optionOrders: {},
     timeLimitSeconds: EXAM_TIME_SECONDS,
     remainingSeconds: EXAM_TIME_SECONDS,
     timerInterval: null,
@@ -36,6 +37,17 @@
       a[j] = tmp;
     }
     return a;
+  }
+
+  function shuffledOrder(question) {
+    return shuffle(question.options.map(function (_, i) { return i; }));
+  }
+
+  function getOptionOrder(question) {
+    if (!state.optionOrders[question.id]) {
+      state.optionOrders[question.id] = shuffledOrder(question);
+    }
+    return state.optionOrders[question.id];
   }
 
   function setsEqual(a, b) {
@@ -229,6 +241,7 @@
     state.currentIndex = 0;
     state.answers = {};
     state.flagged = {};
+    state.optionOrders = {};
     state.timeLimitSeconds = EXAM_TIME_SECONDS;
     state.remainingSeconds = EXAM_TIME_SECONDS;
 
@@ -283,7 +296,8 @@
   function renderExamOptions(question) {
     el.examOptions.innerHTML = "";
     var selected = state.answers[question.id] || new Set();
-    question.options.forEach(function (opt, idx) {
+    getOptionOrder(question).forEach(function (idx) {
+      var opt = question.options[idx];
       var label = document.createElement("label");
       label.className = "option" + (selected.has(idx) ? " selected" : "");
 
@@ -405,6 +419,7 @@
     state.mode = "practice";
     state.questions = shuffle(QUESTIONS.slice());
     state.currentIndex = 0;
+    state.optionOrders = {};
     state.practiceResults = [];
     showScreen("practice");
     renderPracticeQuestion();
@@ -441,7 +456,9 @@
 
   function renderPracticeOptions(question) {
     el.practiceOptions.innerHTML = "";
-    question.options.forEach(function (opt, idx) {
+    var order = getOptionOrder(question);
+    order.forEach(function (idx) {
+      var opt = question.options[idx];
       var label = document.createElement("label");
       label.className = "option";
 
@@ -457,8 +474,8 @@
           state.currentSelection.add(idx);
         }
         el.practiceCheckBtn.disabled = state.currentSelection.size === 0;
-        Array.prototype.forEach.call(el.practiceOptions.children, function (child, i) {
-          child.classList.toggle("selected", state.currentSelection.has(i));
+        Array.prototype.forEach.call(el.practiceOptions.children, function (child, pos) {
+          child.classList.toggle("selected", state.currentSelection.has(order[pos]));
         });
       });
 
@@ -477,14 +494,16 @@
     var correctSet = correctIndexSet(q);
     var selectedSet = new Set(state.currentSelection);
     var isCorrect = setsEqual(selectedSet, correctSet);
+    var order = getOptionOrder(q);
 
     state.practiceChecked = true;
     state.practiceResults.push({ question: q, selectedSet: selectedSet, correctSet: correctSet, isCorrect: isCorrect });
 
-    Array.prototype.forEach.call(el.practiceOptions.children, function (child, i) {
+    Array.prototype.forEach.call(el.practiceOptions.children, function (child, pos) {
+      var idx = order[pos];
       child.querySelector("input").disabled = true;
-      if (correctSet.has(i)) child.classList.add("is-correct-answer");
-      if (selectedSet.has(i) && !correctSet.has(i)) child.classList.add("is-wrong-selected");
+      if (correctSet.has(idx)) child.classList.add("is-correct-answer");
+      if (selectedSet.has(idx) && !correctSet.has(idx)) child.classList.add("is-wrong-selected");
     });
 
     el.practiceVerdict.textContent = isCorrect ? "✔ Correct" : "✘ Incorrect";
@@ -643,7 +662,8 @@
 
     var optList = document.createElement("div");
     optList.className = "options-list review-options";
-    item.question.options.forEach(function (opt, i) {
+    getOptionOrder(item.question).forEach(function (i) {
+      var opt = item.question.options[i];
       var row = document.createElement("div");
       row.className = "review-option";
       if (item.correctSet.has(i)) row.classList.add("is-correct-answer");
